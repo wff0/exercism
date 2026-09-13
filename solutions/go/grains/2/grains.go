@@ -1,0 +1,25 @@
+package grains
+
+import (
+	"errors"
+	"math"
+)
+
+func Square(number int) (uint64, error) {
+	if number < 1 || number > 64 {
+		return 0, errors.ErrUnsupported
+	}
+	pow := math.Pow(2, float64(number-1))
+	return uint64(pow), nil
+}
+
+func Total() uint64 {
+	var sum uint64
+	for i := 1; i <= 64; i++ {
+		num, _ := Square(i)
+		sum += num
+	}
+
+	//sum := 2 * (math.Pow(2, 64) - 1.0)
+	return sum
+}
